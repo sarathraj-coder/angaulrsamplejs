@@ -1,0 +1,32 @@
+<p>welcome works!</p>
+
+
+<!-- <div *ngFor="let item of colleges">
+    <h2> {{item.name}}  </h2>
+    <h2> {{item.location}}  </h2>
+
+</div> -->
+
+
+
+<form class="student-form">
+         Id : <input type="text"  [(ngModel)]="student.id" name="studentid"  placeholder="enter id" /> <br/>
+         Name : <input type="text"  [(ngModel)]="student.name" name="studentname"  placeholder="enter name" /><br/>
+         Age  :  <input type="text"  [(ngModel)]="student.age" name="studentage"  placeholder="enter age" /><br/>
+         mark : <input type="text" [(ngModel)]="student.mark" name="studentmark" placeholder="enter mark" /><br/>
+         <input type="button" value="save" (click)="save()" />
+</form>    
+
+
+
+
+<br/>
+ <h2> School Details  </h2>
+
+<table border="1">
+    <tr><td>Id</td><td>Name</td><td>Age</td><td>Mark</td><td>Delete</td><td>view</td></tr>
+    <tr  *ngFor="let item of students" ><td>{{ item.id}}</td><td>{{ item.name}}</td><td>{{ item.age}}</td><td>{{ item.mark}}</td>
+    <td> <input type="button" value="delete" (click)="delete(item)" /></td>
+    <td> <input type="button" value="view" (click)="view(item)" /></td>
+    </tr>
+</table>
