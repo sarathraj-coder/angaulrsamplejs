@@ -8,15 +8,44 @@
 </div> -->
 
 
+{{errormessage}}
+<form [formGroup]="stuentForm" class="student-form">
+         Id :    <input type="text" formControlName="id" name="studentid"  placeholder="enter id" /> <br/>
+         Name :  <input type="text"  formControlName="name"  name="studentname"  placeholder="enter name" /><br/>
+            <div  *ngIf="stuentForm.controls['name'].hasError('required') && 
+            stuentForm.controls['name'].touched">
+                Name is required 
+            </div>     
+            
+<!-- 
+                <small class="gene-block"
+                *ngIf="form.controls['courseName'].hasError('required') && form.controls['courseName'].touched"
+                class="warn-text">
+                Course Name is required
+             </small> -->
 
-<form class="student-form">
-         Id : <input type="text"  [(ngModel)]="student.id" name="studentid"  placeholder="enter id" /> <br/>
-         Name : <input type="text"  [(ngModel)]="student.name" name="studentname"  placeholder="enter name" /><br/>
-         Age  :  <input type="text"  [(ngModel)]="student.age" name="studentage"  placeholder="enter age" /><br/>
-         mark : <input type="text" [(ngModel)]="student.mark" name="studentmark" placeholder="enter mark" /><br/>
-         <input type="button" value="save" (click)="save()" />
+
+
+         Age  :  <input type="text"  formControlName="age" name="studentage"  placeholder="enter age" /><br/>
+                  
+
+         <div  *ngIf="stuentForm.controls['age'].hasError('required') && 
+         stuentForm.controls['age'].touched">
+             Age is required 
+         </div>  
+
+         <div  *ngIf="stuentForm.controls['age'].hasError('max') && 
+         stuentForm.controls['age'].touched">
+             Age is less than 50 
+         </div> 
+
+         mark :  <input type="text" formControlName="mark"  name="studentmark" placeholder="enter mark" /><br/>
+              
+                <input type="button" value="save" (click)="save()"  />
 </form>    
 
+
+<!-- [disabled]="!stuentForm.valid" -->
 
 
 

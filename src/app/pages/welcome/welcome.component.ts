@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Student } from 'src/app/model/student';
 import { UserServiceService } from 'src/app/services/user-service.service';
 import { error } from 'protractor';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-welcome',
@@ -15,10 +16,25 @@ export class WelcomeComponent implements OnInit {
   student:Student
   students:Student[] = [] 
   colleges = [] 
+  stuentForm
+  errormessage
 
-  constructor(private userService:UserServiceService) {
+  constructor(private userService:UserServiceService,
+    private fb:FormBuilder) {
       this.student =new Student()
+      this.buildForm()
      // this.colleges =  userService.getColleges()
+   }
+
+   buildForm(){
+    this.stuentForm = this.fb.group({
+      id:new FormControl(),
+      name:[null,[Validators.required]],
+      age:[null,[Validators.required,Validators.max(50)]],
+      mark:[null,[Validators.required,Validators.min(25),Validators.max(50)]]
+    })
+
+
    }
 
   ngOnInit(): void {
@@ -41,6 +57,11 @@ export class WelcomeComponent implements OnInit {
 
   save(){
 
+
+    console.log(this.stuentForm.get('age'))
+    console.log(this.stuentForm.get('age').value)
+    console.log(this.stuentForm)
+    if(this.stuentForm.valid){
     //console.log("Saved")
    var x = this.student
    var found =  this.students.find(item => item.id==x.id)
@@ -60,6 +81,14 @@ export class WelcomeComponent implements OnInit {
    this.update(this.student)
    }
    this.student =new Student()
+  }else{
+    this.errormessage="not a valid item"
+    //this.stuentForm.valid =false
+    this.stuentForm.patchValue({name: 'Sarath'}); 
+
+
+
+  }
   }
 
   arrayAdd(stu:Student){
